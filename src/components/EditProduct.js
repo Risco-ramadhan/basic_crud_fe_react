@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const EditProduct = () => {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
@@ -34,15 +36,11 @@ const EditProduct = () => {
     formData.append("file", file);
     formData.append("title", title);
     try {
-      await axios.patch(
-        `https://8dda-103-78-9-218.ngrok-free.app/products/${id}`,
-        formData,
-        {
-          headers: {
-            "Content-type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.patch(`${apiUrl}/products/${id}`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
       navigate("/");
     } catch (error) {
       console.log(error);

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-
 const AddProduct = () => {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
@@ -23,15 +22,11 @@ const AddProduct = () => {
     formData.append("file", file);
     formData.append("title", title);
     try {
-      await axios.post(
-        "https://8dda-103-78-9-218.ngrok-free.app/products",
-        formData,
-        {
-          headers: {
-            "Content-type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`${apiUrl}/products`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
       navigate("/");
     } catch (error) {
       console.log(error);
