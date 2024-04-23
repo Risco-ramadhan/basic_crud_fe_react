@@ -21,9 +21,7 @@ const ProductList = () => {
 
   const deleteProduct = async (productId) => {
     try {
-      await axios.delete(
-        `https://8dda-103-78-9-218.ngrok-free.app/products/${productId}`
-      );
+      await axios.delete(`${apiUrl}/products/${productId}`);
       getProducts();
     } catch (error) {
       console.log(error);
@@ -41,7 +39,7 @@ const ProductList = () => {
             <div className="card">
               <div className="card-image">
                 <figure className="image is-4by3">
-                  <img src={product.url} alt="Image" />
+                  <img src={apiUrl + "/" + product.url} alt="Image" />
                 </figure>
               </div>
               <div className="card-content">
